@@ -198,15 +198,277 @@ public class BioskopWithScanner {
   3.	Modifikasi kode program untuk menghandle apabila nomor baris/kolom kursi yang tidak tersedia
 
   Jawaban :
-  
+  ```
+import java.util.Scanner;
+
+public class BioskopWithScanner {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int baris, kolom, menu;
+        String nama;
+
+        String[][] penonton = new String[4][2];
+
+        while (true) {
+            System.out.println("1. Input data penonton");
+            System.out.println("2. Tampilkan daftar penonton");
+            System.out.println("3. Exit");
+            System.out.print("Pilih menu (1/2/3): ");
+
+            menu = sc.nextInt();
+            sc.nextLine(); 
+
+            switch (menu) {
+
+                case 1:
+                    System.out.print("Masukkan nama: ");
+                    nama = sc.nextLine();
+
+                    
+                    while (true) {
+                        System.out.print("Masukkan baris (1-4): ");
+                        baris = sc.nextInt();
+
+                        if (baris >= 1 && baris <= 4) break;
+                        System.out.println("Nomor baris tidak tersedia!");
+                    }
+
+                    
+                    while (true) {
+                        System.out.print("Masukkan kolom (1-2): ");
+                        kolom = sc.nextInt();
+
+                        if (kolom >= 1 && kolom <= 2) break;
+                        System.out.println("Nomor kolom tidak tersedia!");
+                    }
+
+                    // Cek apakah kursi kosong atau tidak
+                    if (penonton[baris - 1][kolom - 1] != null) {
+                        System.out.println("Kursi sudah ditempati oleh "
+                                + penonton[baris - 1][kolom - 1]);
+                    } else {
+                        penonton[baris - 1][kolom - 1] = nama;
+                        System.out.println("Data penonton berhasil disimpan!");
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("=== Daftar Penonton ===");
+
+                    for (int i = 0; i < 4; i++) {
+                        for (int j = 0; j < 2; j++) {
+                            if (penonton[i][j] != null) {
+                                System.out.print("Baris " + (i + 1) +
+                                        " Kolom " + (j + 1) +
+                                        ": " + penonton[i][j] + "\t");
+                            } else {
+                                System.out.print("Baris " + (i + 1) +
+                                        " Kolom " + (j + 1) +
+                                        ": Kosong\t");
+                            }
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("Terima kasih telah menggunakan program ini!");
+                    return;
+
+                default:
+                    System.out.println("Harap pilih menu yang benar.");
+            }
+        }
+    }
+}
+```
+Hasilnya :
+
+<img width="388" height="469" alt="Screenshot 2025-11-17 221136" src="https://github.com/user-attachments/assets/f3a1a642-bb8e-483c-bb59-7bfe45888f07" />
 
   4. Pada menu 1, modifikasi kode program untuk memberikan warning apabila kursi yang dipilih sudah terisi oleh penonton lainnya lalu munculkan perintah untuk memasukkan baris dan kolom kembali
 
  Jawaban : 
+ ```
+import java.util.Scanner;
+
+public class BioskopWithScanner {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int baris, kolom, menu;
+        String nama;
+
+        String[][] penonton = new String[4][2];
+
+        while (true) {
+            System.out.println("1. Input data penonton");
+            System.out.println("2. Tampilkan daftar penonton");
+            System.out.println("3. Exit");
+            System.out.print("Pilih menu (1/2/3): ");
+
+            menu = sc.nextInt();
+            sc.nextLine(); 
+
+            switch (menu) {
+
+                case 1:
+                    System.out.print("Masukkan nama: ");
+                    nama = sc.nextLine();
+
+                    
+                    while (true) {
+                        System.out.print("Masukkan baris (1-4): ");
+                        baris = sc.nextInt();
+
+                        if (baris >= 1 && baris <= 4) break;
+                        System.out.println("Nomor baris tidak tersedia!");
+                    }
+
+                    
+                    while (true) {
+                        System.out.print("Masukkan kolom (1-2): ");
+                        kolom = sc.nextInt();
+
+                        if (kolom >= 1 && kolom <= 2) break;
+                        System.out.println("Nomor kolom tidak tersedia!");
+                    }
+
+                 
+                    if (penonton[baris - 1][kolom - 1] != null) {
+                        System.out.println("Kursi sudah ditempati oleh "
+                                + penonton[baris - 1][kolom - 1]);
+                        System.out.println("Silahkan pilih baris dan kolom lain!\n");
+                    } else {
+                        penonton[baris - 1][kolom - 1] = nama;
+                        System.out.println("Data penonton berhasil disimpan!");
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("=== Daftar Penonton ===");
+
+                    for (int i = 0; i < 4; i++) {
+                        for (int j = 0; j < 2; j++) {
+                            if (penonton[i][j] != null) {
+                                System.out.print("Baris " + (i + 1) +
+                                        " Kolom " + (j + 1) +
+                                        ": " + penonton[i][j] + "\t");
+                            } else {
+                                System.out.print("Baris " + (i + 1) +
+                                        " Kolom " + (j + 1) +
+                                        ": Kosong\t");
+                            }
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("Terima kasih telah menggunakan program ini!");
+                    return;
+
+                default:
+                    System.out.println("Harap pilih menu yang benar.");
+            }
+        }
+    }
+}
+```
+Hasilnya : 
+
+<img width="309" height="275" alt="Screenshot 2025-11-17 221808" src="https://github.com/user-attachments/assets/509ad2c9-9876-4915-99e4-53d692d433e7" />
+
 
  5. Pada menu 2, jika kursi kosong, ganti null dengan ***
 
+Jawaban :
+```
+ if (penonton[i][j] != null) {
+                                System.out.print("Baris " + (i + 1) +
+                                        " Kolom " + (j + 1) +
+                                        ": " + penonton[i][j] + "\t");
+                            } else {
+                                System.out.print("Baris " + (i + 1) +
+                                        " Kolom " + (j + 1) +
+                                        ": ***\t");
+                            }
+```
+
+Hasilnya : 
+
+<img width="395" height="174" alt="Screenshot 2025-11-17 222134" src="https://github.com/user-attachments/assets/8d70129a-e9ba-415b-8837-f94d8f1f042a" />
+
+####  Percobaan 3: Array 2 Dimensi dengan Length Baris Berbeda waktu
+
+1.	Tambahkan kode program sebagai berikut
+   
+   Jawaban :
+
+   <img width="571" height="349" alt="Screenshot 2025-11-17 223359" src="https://github.com/user-attachments/assets/1af47885-3471-49ac-8055-5a5d98a8c461" />
+
+2. Apa fungsi dari Arrays.toString()?
+
+   Jawaban :
+
+    Mengubah Array menjadi String yang dimana mudah di baca sehingga dapat di dampilkan di System.out.println();
+
+3.	Apa nilai default untuk elemen pada array dengan tipe data int?
+
+   Jawaban : 
+
+  Nilai default untuk element di Array dengan tipe data in adalah 0, karena berkaitan dengan cara java mengelolah memori keamanan tipe data.
+
+4.	Tambahkan kode program berikut
+
+   Jawaban : 
+   ```
+ import java.util.Arrays;
+ 
+public class number13 {
+    public static void main(String[] args) {
+        
+        int [][] myNumbers = new int[3][];
+        myNumbers[0] = new int[5];
+        myNumbers[1] = new int[3];
+        myNumbers[2] = new int[1];
+
+        for (int i = 0; i < myNumbers.length; i++) {
+            System.out.println(Arrays.toString(myNumbers[i]));          
+        }
+
+        for (int i = 0; i < myNumbers.length; i++) {
+            System.out.println("panjang baris ke-" + (i+1) + " :" + myNumbers[i].length);
+            
+        }
+    }
+    
+}
+```
+
+5.	Array myNumbers memiliki length berbeda untuk setiap barisnya. Apakah panjang array dapat dimodifikasi setelah diinstansiasi?
+
     Jawaban :
+
+    Tidak bisa, karena panjag array tidak dapat dimodifikasi setelah array diinstansiasi
+
+####  Percobaan 4: Studi Kasus SIAKAD 
+
+
+
+
+   
+
+   
+ 
+
+
+
+
+    
+
+
+
+   
 
     
 
@@ -236,6 +498,7 @@ public class BioskopWithScanner {
  
   
    
+
 
 
 
